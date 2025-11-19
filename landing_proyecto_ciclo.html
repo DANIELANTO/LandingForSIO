@@ -3,8 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto de Ciclo - UES</title>
+    <title>Proyecto SO - UES F.I.A</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #ec4899;
+            --accent: #10b981;
+            --bg-dark: #09090b;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+            --glass: blur(20px);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,460 +27,411 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #0f0f1e;
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-dark);
+            color: #ffffff;
             min-height: 100vh;
-            padding: 20px;
-            position: relative;
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        body::before {
-            content: '';
+        /* Fondo animado moderno */
+        .background-fx {
             position: fixed;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
             background: 
-                radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 40% 20%, rgba(46, 213, 115, 0.1) 0%, transparent 50%);
-            animation: float 20s ease-in-out infinite;
-            z-index: 0;
+                radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.15), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(236, 72, 153, 0.15), transparent 25%);
+            animation: backgroundPulse 10s ease-in-out infinite alternate;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            33% { transform: translate(30px, -30px) rotate(120deg); }
-            66% { transform: translate(-20px, 20px) rotate(240deg); }
+        @keyframes backgroundPulse {
+            0% { opacity: 0.5; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.1); }
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-            position: relative;
-            z-index: 1;
+            padding: 40px 20px;
         }
 
+        /* Header Estilizado */
         .header {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 30px;
-            padding: 60px 40px;
             text-align: center;
-            margin-bottom: 40px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
-
-        .logo-container {
-            margin-bottom: 30px;
-            animation: fadeInDown 0.8s ease-out;
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .logo-wrapper {
-            display: inline-block;
+            margin-bottom: 60px;
             position: relative;
         }
 
-        .logo-wrapper::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            background: linear-gradient(45deg, #667eea, #764ba2, #2ed573);
-            border-radius: 50%;
-            opacity: 0.3;
-            filter: blur(15px);
-            animation: pulse 3s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.3; }
-            50% { transform: scale(1.1); opacity: 0.5; }
-        }
-
-        .logo {
-            width: 120px;
-            height: 120px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 50%;
-            padding: 15px;
-            display: flex;
+        .university-brand {
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-            position: relative;
-            z-index: 1;
-        }
-
-        .logo img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-
-        .logo-text {
-            font-size: 2.5em;
-            font-weight: 900;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 2px;
-        }
-
-        .header h1 {
-            font-size: 2.2em;
-            margin-bottom: 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #2ed573 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            animation: fadeIn 1s ease-out 0.2s both;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .header h2 {
-            font-size: 1.4em;
-            font-weight: 400;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 8px;
-            animation: fadeIn 1s ease-out 0.4s both;
-        }
-
-        .header h3 {
-            font-size: 1.2em;
-            font-weight: 300;
-            color: rgba(255, 255, 255, 0.7);
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            border-radius: 24px;
             margin-bottom: 25px;
-            animation: fadeIn 1s ease-out 0.6s both;
+            border: 1px solid var(--border);
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
+            animation: float 6s ease-in-out infinite;
         }
 
-        .materia-tag {
-            display: inline-block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 12px 35px;
-            border-radius: 50px;
-            font-size: 1.1em;
-            font-weight: 600;
-            color: white;
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
-            margin-bottom: 15px;
-            margin-top: 10px;
-            animation: fadeIn 1s ease-out 0.8s both;
+        .university-brand i {
+            font-size: 3rem;
+            background: linear-gradient(to right, #fff, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .ciclo-badge {
-            display: inline-block;
-            background: rgba(46, 213, 115, 0.2);
-            border: 2px solid rgba(46, 213, 115, 0.5);
-            padding: 10px 30px;
-            border-radius: 50px;
-            font-size: 1em;
-            font-weight: 600;
-            color: #2ed573;
-            margin-top: 15px;
-            animation: fadeIn 1s ease-out 1s both;
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #fff 20%, #a5b4fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .badges-container {
+        .subtitle {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .tags-wrapper {
             display: flex;
-            flex-direction: column;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            padding: 8px 20px;
+            border-radius: 100px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            transition: transform 0.3s ease;
+        }
+
+        .tag.materia {
+            background: rgba(99, 102, 241, 0.2);
+            color: #a5b4fc;
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .tag.ciclo {
+            background: rgba(16, 185, 129, 0.2);
+            color: #6ee7b7;
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .tag:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Sección Principal */
+        .main-grid {
+            display: grid;
+            gap: 40px;
+        }
+
+        /* Tarjeta de Indicaciones (Estilo Terminal) */
+        .indicaciones-card {
+            background: #1e1e24;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .card-header {
+            background: rgba(255,255,255,0.05);
+            padding: 15px 25px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
             align-items: center;
             gap: 10px;
-            margin-top: 20px;
         }
 
-        .content {
-            display: grid;
-            gap: 30px;
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .red { background: #ef4444; }
+        .yellow { background: #f59e0b; }
+        .green { background: #10b981; }
+        
+        .card-title {
+            margin-left: 15px;
+            font-size: 0.9rem;
+            color: #94a3b8;
+            font-family: monospace;
         }
 
-        .section {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 25px;
-            padding: 40px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            animation: slideUp 0.6s ease-out both;
+        .card-body {
+            padding: 30px;
         }
 
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .highlight-box {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
         }
 
-        .section:nth-child(2) {
-            animation-delay: 0.2s;
+        .icon-box {
+            background: rgba(99, 102, 241, 0.1);
+            padding: 15px;
+            border-radius: 12px;
+            color: var(--primary);
         }
 
-        .section-title {
-            font-size: 1.8em;
-            margin-bottom: 25px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 700;
+        .text-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .text-content p {
+            color: #cbd5e1;
+            font-size: 1.1rem;
+        }
+
+        /* Grid de Integrantes */
+        .section-header {
             display: flex;
             align-items: center;
             gap: 15px;
+            margin-bottom: 30px;
+            margin-top: 20px;
         }
 
-        .section-title::before {
-            content: '';
-            width: 5px;
-            height: 40px;
-            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
-            border-radius: 10px;
-        }
-
-        .indicaciones {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid rgba(102, 126, 234, 0.2);
-            line-height: 1.8;
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1.05em;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .indicaciones::before {
-            content: '💡';
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 3em;
-            opacity: 0.1;
-        }
-
-        .indicaciones strong {
-            color: #667eea;
-            font-weight: 600;
+        .section-header h2 {
+            font-size: 1.8rem;
+            background: linear-gradient(to right, #fff, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .integrantes-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
-            margin-top: 30px;
         }
 
-        .integrante-card {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        .member-card {
+            background: var(--card-bg);
+            backdrop-filter: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 25px;
             position: relative;
             overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
 
-        .integrante-card::before {
+        .member-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.03), transparent);
+            transform: translateX(-100%);
+            transition: 0.6s;
         }
 
-        .integrante-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 45px rgba(102, 126, 234, 0.4);
-            border-color: rgba(102, 126, 234, 0.5);
+        .member-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(99, 102, 241, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
 
-        .integrante-card:hover::before {
-            opacity: 0.1;
+        .member-card:hover::before {
+            transform: translateX(100%);
         }
 
-        .integrante-content {
-            position: relative;
-            z-index: 1;
+        .avatar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: white;
+            flex-shrink: 0;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
-        .integrante-nombre {
-            font-size: 1.25em;
+        .member-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
             font-weight: 600;
-            margin-bottom: 15px;
-            color: rgba(255, 255, 255, 0.95);
-            line-height: 1.4;
         }
 
-        .integrante-carnet {
-            font-size: 1em;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
-            border: 1px solid rgba(102, 126, 234, 0.4);
-            padding: 8px 20px;
-            border-radius: 50px;
+        .carnet-badge {
             display: inline-block;
-            color: #b8c5ff;
-            font-weight: 500;
-            letter-spacing: 0.5px;
+            font-size: 0.85rem;
+            padding: 4px 12px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.05);
+            color: #94a3b8;
+            font-family: monospace;
+            border: 1px solid var(--border);
         }
 
+        /* Footer */
         .footer {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 25px;
-            padding: 35px;
+            margin-top: 80px;
             text-align: center;
-            margin-top: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
+            border-top: 1px solid var(--border);
+            border-radius: 24px 24px 0 0;
         }
 
-        .footer-docente {
-            font-size: 1.4em;
-            font-weight: 600;
-            margin-bottom: 8px;
-            background: linear-gradient(135deg, #667eea 0%, #2ed573 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .docente-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(16, 185, 129, 0.1);
+            padding: 10px 25px;
+            border-radius: 50px;
+            color: #34d399;
+            margin-bottom: 15px;
+            border: 1px solid rgba(16, 185, 129, 0.2);
         }
 
-        .footer-info {
-            font-size: 1.1em;
-            color: rgba(255, 255, 255, 0.7);
+        .group-info {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         @media (max-width: 768px) {
-            .header {
-                padding: 40px 25px;
-            }
-
-            .header h1 {
-                font-size: 1.6em;
-            }
-            
-            .header h2 {
-                font-size: 1.2em;
-            }
-
-            .header h3 {
-                font-size: 1em;
-            }
-
-            .section {
-                padding: 30px 20px;
-            }
-
-            .integrantes-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .logo {
-                width: 100px;
-                height: 100px;
-            }
+            h1 { font-size: 2rem; }
+            .member-card { flex-direction: column; text-align: center; }
+            .highlight-box { flex-direction: column; text-align: center; align-items: center; }
         }
     </style>
 </head>
 <body>
+
+    <div class="background-fx"></div>
+
     <div class="container">
-        <div class="header">
-            <div class="logo-container">
-                <div class="logo-wrapper">
-                    <div class="logo">
-                        <div class="logo-text">UES</div>
+        <header class="header">
+            <div class="university-brand">
+                <i class="fa-solid fa-building-columns"></i>
+            </div>
+            <h1>Universidad de El Salvador</h1>
+            <div class="subtitle">Facultad de Ingeniería y Arquitectura • Escuela de Ingeniería de Sistemas</div>
+            
+            <div class="tags-wrapper">
+                <div class="tag materia"><i class="fa-solid fa-server"></i> &nbsp;Sistemas Operativos</div>
+                <div class="tag ciclo"><i class="fa-regular fa-calendar-check"></i> &nbsp;Ciclo 02 - 2025</div>
+            </div>
+        </header>
+
+        <main class="main-grid">
+            
+            <section class="indicaciones-card">
+                <div class="card-header">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                    <span class="card-title">instrucciones_proyecto.txt</span>
+                </div>
+                <div class="card-body">
+                    <div class="highlight-box">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-network-wired fa-2x"></i>
+                        </div>
+                        <div class="text-content">
+                            <h3>Procedimiento Técnico</h3>
+                            <p>El estudiante deberá presentar durante la sesión magistral el buen funcionamiento de la implementación de la <strong>topología con virtualizaciones</strong> de sistemas operativos Desktop y Server.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <h1>UNIVERSIDAD DE EL SALVADOR</h1>
-            <h2>FACULTAD DE INGENIERÍA Y ARQUITECTURA</h2>
-            <h3>ESCUELA DE INGENIERÍA DE SISTEMAS INFORMÁTICOS</h3>
-            <div class="badges-container">
-                <div class="materia-tag">📚 SISTEMAS OPERATIVOS</div>
-                <div class="ciclo-badge">🎓 Ciclo 02 - 2025</div>
-            </div>
-        </div>
+            </section>
 
-        <div class="content">
-            <div class="section">
-                <h2 class="section-title">Indicaciones del Proyecto</h2>
-                <div class="indicaciones">
-                    <strong>Procedimiento:</strong> El estudiante deberá presentar durante la sesión magistral el buen funcionamiento de la implementación de la topología con virtualizaciones de sistemas operativos Desktop y servidor.
+            <section>
+                <div class="section-header">
+                    <i class="fa-solid fa-users-viewfinder" style="color: var(--secondary);"></i>
+                    <h2>Equipo de Proyecto</h2>
                 </div>
-            </div>
-
-            <div class="section">
-                <h2 class="section-title">Integrantes del Equipo</h2>
+                
                 <div class="integrantes-grid">
-                    <div class="integrante-card">
-                        <div class="integrante-content">
-                            <div class="integrante-nombre">Daniel Antonio Romero Duarte</div>
-                            <div class="integrante-carnet">RD17009</div>
+                    <div class="member-card">
+                        <div class="avatar">DR</div>
+                        <div class="member-info">
+                            <h4>Daniel Antonio Romero</h4>
+                            <span class="carnet-badge">RD17009</span>
                         </div>
                     </div>
-                    <div class="integrante-card">
-                        <div class="integrante-content">
-                            <div class="integrante-nombre">Luis Miguel Cortez Domínguez</div>
-                            <div class="integrante-carnet">CD13001</div>
+
+                    <div class="member-card">
+                        <div class="avatar">LC</div>
+                        <div class="member-info">
+                            <h4>Luis Miguel Cortez</h4>
+                            <span class="carnet-badge">CD13001</span>
                         </div>
                     </div>
-                    <div class="integrante-card">
-                        <div class="integrante-content">
-                            <div class="integrante-nombre">Alvaro Alexander Ayala Serrano</div>
-                            <div class="integrante-carnet">AS13053</div>
+
+                    <div class="member-card">
+                        <div class="avatar">AA</div>
+                        <div class="member-info">
+                            <h4>Alvaro Alexander Ayala</h4>
+                            <span class="carnet-badge">AS13053</span>
                         </div>
                     </div>
-                    <div class="integrante-card">
-                        <div class="integrante-content">
-                            <div class="integrante-nombre">Erick David Ayala Martínez</div>
-                            <div class="integrante-carnet">AM21012</div>
+
+                    <div class="member-card">
+                        <div class="avatar">EA</div>
+                        <div class="member-info">
+                            <h4>Erick David Ayala</h4>
+                            <span class="carnet-badge">AM21012</span>
                         </div>
                     </div>
-                    <div class="integrante-card">
-                        <div class="integrante-content">
-                            <div class="integrante-nombre">Cristian Rodolfo Aguirre González</div>
-                            <div class="integrante-carnet">AG19101</div>
+
+                    <div class="member-card">
+                        <div class="avatar">CA</div>
+                        <div class="member-info">
+                            <h4>Cristian Aguirre</h4>
+                            <span class="carnet-badge">AG19101</span>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </section>
 
-        <div class="footer">
-            <div class="footer-docente">👨‍🏫 Ing. Oscar Rodriguez</div>
-            <div class="footer-info">Grupo Teórico 02</div>
-        </div>
+        </main>
+
+        <footer class="footer">
+            <div class="docente-badge">
+                <i class="fa-solid fa-chalkboard-user"></i>
+                <span>Ing. Oscar Rodriguez</span>
+            </div>
+            <div class="group-info">
+                Grupo Teórico 02 • UES FIA 2025
+            </div>
+        </footer>
     </div>
+
 </body>
 </html>
