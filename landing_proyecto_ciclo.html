@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto de Ciclo - UES</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f0f1e;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(46, 213, 115, 0.1) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 60px 40px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo-container {
+            margin-bottom: 30px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo-wrapper {
+            display: inline-block;
+            position: relative;
+        }
+
+        .logo-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, #667eea, #764ba2, #2ed573);
+            border-radius: 50%;
+            opacity: 0.3;
+            filter: blur(15px);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0.5; }
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 50%;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-size: 2.5em;
+            font-weight: 900;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #2ed573 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            animation: fadeIn 1s ease-out 0.2s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .header h2 {
+            font-size: 1.4em;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 8px;
+            animation: fadeIn 1s ease-out 0.4s both;
+        }
+
+        .header h3 {
+            font-size: 1.2em;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 25px;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        .materia-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 12px 35px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: white;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            margin-bottom: 15px;
+            margin-top: 10px;
+            animation: fadeIn 1s ease-out 0.8s both;
+        }
+
+        .ciclo-badge {
+            display: inline-block;
+            background: rgba(46, 213, 115, 0.2);
+            border: 2px solid rgba(46, 213, 115, 0.5);
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-size: 1em;
+            font-weight: 600;
+            color: #2ed573;
+            margin-top: 15px;
+            animation: fadeIn 1s ease-out 1s both;
+        }
+
+        .badges-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .content {
+            display: grid;
+            gap: 30px;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            animation: slideUp 0.6s ease-out both;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 5px;
+            height: 40px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+        }
+
+        .indicaciones {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.05em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .indicaciones::before {
+            content: '💡';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 3em;
+            opacity: 0.1;
+        }
+
+        .indicaciones strong {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .integrantes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .integrante-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .integrante-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .integrante-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 45px rgba(102, 126, 234, 0.4);
+            border-color: rgba(102, 126, 234, 0.5);
+        }
+
+        .integrante-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .integrante-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .integrante-nombre {
+            font-size: 1.25em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1.4;
+        }
+
+        .integrante-carnet {
+            font-size: 1em;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
+            border: 1px solid rgba(102, 126, 234, 0.4);
+            padding: 8px 20px;
+            border-radius: 50px;
+            display: inline-block;
+            color: #b8c5ff;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .footer {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 35px;
+            text-align: center;
+            margin-top: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .footer-docente {
+            font-size: 1.4em;
+            font-weight: 600;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #667eea 0%, #2ed573 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-info {
+            font-size: 1.1em;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 40px 25px;
+            }
+
+            .header h1 {
+                font-size: 1.6em;
+            }
+            
+            .header h2 {
+                font-size: 1.2em;
+            }
+
+            .header h3 {
+                font-size: 1em;
+            }
+
+            .section {
+                padding: 30px 20px;
+            }
+
+            .integrantes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .logo {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <div class="logo-wrapper">
+                    <div class="logo">
+                        <div class="logo-text">UES</div>
+                    </div>
+                </div>
+            </div>
+            <h1>UNIVERSIDAD DE EL SALVADOR</h1>
+            <h2>FACULTAD DE INGENIERÍA Y ARQUITECTURA</h2>
+            <h3>ESCUELA DE INGENIERÍA DE SISTEMAS INFORMÁTICOS</h3>
+            <div class="badges-container">
+                <div class="materia-tag">📚 SISTEMAS OPERATIVOS</div>
+                <div class="ciclo-badge">🎓 Ciclo 02 - 2025</div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <h2 class="section-title">Indicaciones del Proyecto</h2>
+                <div class="indicaciones">
+                    <strong>Procedimiento:</strong> El estudiante deberá presentar durante la sesión magistral el buen funcionamiento de la implementación de la topología con virtualizaciones de sistemas operativos Desktop y servidor.
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Integrantes del Equipo</h2>
+                <div class="integrantes-grid">
+                    <div class="integrante-card">
+                        <div class="integrante-content">
+                            <div class="integrante-nombre">Daniel Antonio Romero Duarte</div>
+                            <div class="integrante-carnet">RD17009</div>
+                        </div>
+                    </div>
+                    <div class="integrante-card">
+                        <div class="integrante-content">
+                            <div class="integrante-nombre">Luis Miguel Cortez Domínguez</div>
+                            <div class="integrante-carnet">CD13001</div>
+                        </div>
+                    </div>
+                    <div class="integrante-card">
+                        <div class="integrante-content">
+                            <div class="integrante-nombre">Alvaro Alexander Ayala Serrano</div>
+                            <div class="integrante-carnet">AS13053</div>
+                        </div>
+                    </div>
+                    <div class="integrante-card">
+                        <div class="integrante-content">
+                            <div class="integrante-nombre">Erick David Ayala Martínez</div>
+                            <div class="integrante-carnet">AM21012</div>
+                        </div>
+                    </div>
+                    <div class="integrante-card">
+                        <div class="integrante-content">
+                            <div class="integrante-nombre">Cristian Rodolfo Aguirre González</div>
+                            <div class="integrante-carnet">AG19101</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-docente">👨‍🏫 Ing. Oscar Rodriguez</div>
+            <div class="footer-info">Grupo Teórico 02</div>
+        </div>
+    </div>
+</body>
+</html>
